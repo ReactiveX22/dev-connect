@@ -18,15 +18,19 @@ class JobController extends Controller
      */
     public function index()
     {
+        // Fetch jobs grouped by 'featured' status
         $jobs = Job::latest()->with('employer', 'tags')->get()->groupBy('featured');
 
+        // Limit featured jobs to 3
+        $featuredJobs = $jobs[1]->take(3) ?? collect(); // Use null coalescence to handle case when there are no featured jobs
 
         return view('jobs.index', [
-            'featuredJobs' => $jobs[1],
-            'jobs' => $jobs[0],
+            'featuredJobs' => $featuredJobs,
+            'jobs' => $jobs[0] ?? collect(), // Handle case where there are no non-featured jobs
             'tags' => Tag::all(),
         ]);
     }
+
 
 
     /**
@@ -69,7 +73,11 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        $job->load(['employer']);
+
+        return view('jobs.show', [
+            'job' => $job,
+        ]);
     }
 
     /**

@@ -13,8 +13,15 @@ class JobSeeder extends Seeder
      */
     public function run(): void
     {
-        $tags = Tag::factory(3)->create();
+        // Create jobs
+        $jobs = Job::factory(20)->create();
 
-        Job::factory(20)->hasAttached($tags)->create();
+        // Get all tags
+        $tags = Tag::all();
+
+        $jobs->each(function ($job) use ($tags) {
+            $randomTags = $tags->random(rand(2, 5)); // Randomly pick between 2 and 5 tags
+            $job->tags()->attach($randomTags->pluck('id')->toArray());
+        });
     }
 }

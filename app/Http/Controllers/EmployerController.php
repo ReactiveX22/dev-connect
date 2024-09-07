@@ -12,7 +12,7 @@ class EmployerController extends Controller
         $employers = Employer::latest()->with('jobs')->get();
 
 
-        return view('employer.index', [
+        return view('employers.index', [
             'employers' => $employers,
         ]);
     }
@@ -21,7 +21,7 @@ class EmployerController extends Controller
     {
         $employer->load('jobs');
 
-        return view('employer.show', [
+        return view('employers.show', [
             'employer' => $employer,
         ]);
     }

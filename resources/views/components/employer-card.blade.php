@@ -11,8 +11,10 @@
 
 
     <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold">53 jobs</h3>
-        <a href="/employer/{{ $employer->id }}" class="inline-flex gap-1 text-sm text-zinc-200">
+        <h3 class="text-lg font-semibold">{{ $employer->jobs->count() }} <span class="pl-1 text-xs text-zinc-400">posted
+                jobs</span>
+        </h3>
+        <a href="/employers/{{ $employer->id }}" class="inline-flex gap-1 text-sm text-zinc-400 hover:text-primary-500">
             View Profile <x-icons.external-link size="20" />
         </a>
     </div>

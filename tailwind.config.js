@@ -1,4 +1,7 @@
+const colors = require('tailwindcss/colors')
+
 /** @type {import('tailwindcss').Config} */
+
 export default {
     content: [
         "./resources/**/*.blade.php",
@@ -6,6 +9,9 @@ export default {
     ],
     theme: {
         extend: {
+            colors:{
+                primary: colors.indigo
+            },
             fontFamily: {
                 'inter': ['Inter', 'sans-serif']
             },
