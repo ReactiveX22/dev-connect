@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
@@ -14,8 +15,13 @@ Route::get('/', [JobController::class, 'index']);
 Route::get('/employers', [EmployerController::class, 'index']);
 Route::get('/employers/{employer}', [EmployerController::class, 'show']);
 
-Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
-Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/jobs/create', [JobController::class, 'create']);
+    Route::post('/jobs', [JobController::class, 'store']);
+
+    Route::get('/profile', [ProfileController::class, 'show']);
+});
+
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 Route::get('/search', SearchController::class);

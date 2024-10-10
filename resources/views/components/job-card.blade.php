@@ -1,5 +1,6 @@
 @php
-    $defaultClasses = 'flex flex-col cursor-pointer border border-zinc-800 text-center';
+    $defaultClasses =
+        'flex flex-col cursor-pointer border border-zinc-800 text-center border border-transparent transition-all duration-300 hover:border-primary-500';
 @endphp
 
 <x-panel {{ $attributes->merge(['class' => $defaultClasses]) }}

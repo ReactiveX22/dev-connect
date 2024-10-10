@@ -19,9 +19,13 @@
 
     @auth
         <div class="flex gap-2">
-            <x-button variant="primary" href="/jobs/create">
-                Post Job
-            </x-button>
+
+            @employer
+                <x-button variant="primary" href="/jobs/create">
+                    Post Job
+                </x-button>
+            @endemployer
+            <x-navbar.nav-link href='/profile' :active="request()->is('profile')">Profile</x-navbar.nav-link>
 
             <form action="/logout" method="post">
                 @csrf

@@ -1,7 +1,8 @@
 @props(['job'])
 
 <a href="">
-    <x-panel class="flex cursor-pointer gap-6 border border-zinc-800"
+    <x-panel
+        class="flex cursor-pointer gap-6 border border-zinc-800 transition-all duration-300 hover:border-primary-500"
         onclick="window.location.href='/jobs/{{ $job->id }}'">
         <div>
             <x-employer-logo :employer="$job->employer" :size=90 />

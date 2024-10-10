@@ -27,6 +27,9 @@ class SessionController extends Controller
 
         request()->session()->regenerate();
 
+        $isEmployer = Auth::user()->employer ? true : false;
+        session(['is_employer' => $isEmployer]);
+
         return redirect('/');
     }
 
