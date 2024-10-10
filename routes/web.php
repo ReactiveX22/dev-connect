@@ -22,8 +22,12 @@ Route::get('/search', SearchController::class);
 Route::get('/tags/{tag:name}', TagController::class);
 
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [RegisteredUserController::class, 'create']);
-    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::get('/register', [RegisteredUserController::class, 'showSelection']);
+    Route::get('/register/job-seeker', [RegisteredUserController::class, 'showJobSeekerForm']);
+    Route::get('/register/employer', [RegisteredUserController::class, 'showEmployerForm']);
+
+    Route::post('/register/job-seeker', [RegisteredUserController::class, 'registerJobSeeker']);
+    Route::post('/register/employer', [RegisteredUserController::class, 'registerEmployer']);
 
     Route::get('/login', [SessionController::class, 'create']);
     Route::post('/login', [SessionController::class, 'store']);

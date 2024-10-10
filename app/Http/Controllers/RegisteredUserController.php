@@ -10,18 +10,26 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    // Show selection page
+    public function showSelection()
     {
-        return view('auth.register');
+        return view('auth.register.selection');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // Show job seeker registration form
+    public function showJobSeekerForm()
+    {
+        return view('auth.register.job-seeker');
+    }
+
+    // Show employer registration form
+    public function showEmployerForm()
+    {
+        return view('auth.register.employer');
+    }
+
+    public function registerEmployer(Request $request)
     {
         $userAttributes = $request->validate([
             'name' => ['required'],
@@ -42,6 +50,21 @@ class RegisteredUserController extends Controller
             'name' => $employerAttributes['employer'],
             'logo' => $logoPath,
         ]);
+
+        Auth::login($user);
+
+        return redirect('/');
+    }
+
+    public function registerJobSeeker(Request $request)
+    {
+        $userAttributes = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Password::min(3)],
+        ]);
+
+        $user = User::create($userAttributes);
 
         Auth::login($user);
 

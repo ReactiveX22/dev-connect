@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="my-4 flex flex-col gap-2">
+            <div class="my-4 flex flex-col items-center gap-2">
                 <div class="text-md">{{ $job->schedule }}</div>
                 <div>
                     <span class="text-xs">from</span> {{ $job->salary }}
@@ -38,7 +38,13 @@
 
         <section>
             <x-section-heading>Apply</x-section-heading>
+            <x-forms.form>
+                <div class="flex flex-col gap-4">
+                    Upload Resume
 
+                    Submit
+                </div>
+            </x-forms.form>
         </section>
     </div>
 </x-layout>
