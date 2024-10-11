@@ -13,15 +13,15 @@ class JobApplicationController extends Controller
     {
         $request->validate([
             'resume' => 'required|mimes:pdf,doc,docx|max:2048',
+        ], [
+            'resume.required' => 'Please select your resume file.',
         ]);
 
         $job = Job::findOrFail($jobId);
 
-        // Handle file upload
         if ($request->hasFile('resume')) {
-            $resumePath = $request->file('resume')->store('resumes', 'public');
+            $resumePath = $request->file('resume')->store('resumes', 'private');
 
-            // Create job application
             JobApplication::create([
                 'user_id' => Auth::id(),
                 'job_id' => $job->id,
@@ -41,5 +41,23 @@ class JobApplicationController extends Controller
         $applications = $job->applications()->get();
 
         return view('jobs.applications', compact('applications', 'job'));
+    }
+
+    public function delete($applicationId)
+    {
+        $application = JobApplication::findOrFail($applicationId);
+
+        if ($application->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $filePath = storage_path('app/private/' . $application->resume);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        $application->delete();
+
+        return redirect()->back()->with('success', 'Application deleted successfully.');
     }
 }

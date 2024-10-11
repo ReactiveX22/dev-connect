@@ -12,11 +12,9 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if ($user->employer) {
-            // Redirect to employer profile view
             return view('profiles.employer', ['employer' => $user->employer]);
         }
 
-        // Redirect to job-seeker profile view
         return view('profiles.jobseeker', ['user' => $user]);
     }
 }

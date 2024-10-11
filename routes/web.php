@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'apply'])->name('jobs.apply');
+    Route::get('/resumes/{application}', [JobController::class, 'downloadResume'])->name('resumes.download');
+    Route::delete('/applications/{application}', [JobApplicationController::class, 'delete'])->name('applications.delete');
 });
 
 Route::get('/jobs/{job}', [JobController::class, 'show']);

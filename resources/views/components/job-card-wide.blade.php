@@ -10,7 +10,7 @@
 
         <div class="flex flex-grow flex-col">
             <a href="/employers/{{ $job->employer->id }}"
-                class="text-nowrap mb-2 self-start text-sm">{{ $job->employer->name }}</a>
+                class="text-nowrap mb-2 self-start border-b border-transparent text-sm transition-all hover:border-primary-500">{{ $job->employer->name }}</a>
 
             <div class="text-nowrap my-2 text-xl font-bold transition-all duration-300 group-hover:text-primary-400">
                 {{ $job->title }}

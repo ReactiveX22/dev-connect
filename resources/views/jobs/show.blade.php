@@ -5,7 +5,8 @@
         @endphp
 
         <x-panel>
-            <div class="mb-4 self-start text-sm">{{ $job->employer->name }}</div>
+            <a href="/employers/{{ $job->employer->id }}"
+                class="text-nowrap mb-2 self-start border-b border-transparent text-sm transition-all hover:border-primary-500">{{ $job->employer->name }}</a>
 
             <div class="my-auto flex justify-center">
                 <div class="text-xl font-bold">
@@ -40,23 +41,50 @@
             @employer(false)
                 <section>
                     <x-section-heading>Apply For The Job</x-section-heading>
-                    <x-forms.form action="{{ route('jobs.apply', $job->id) }}" method="POST" enctype="multipart/form-data"
-                        class="py-4">
-                        <div class="flex flex-col gap-4">
-                            <label class="text-center text-lg font-medium">Upload Your Resume</label>
-                            <div id="drop-area"
-                                class="flex h-32 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-zinc-800 transition-all hover:border-primary-500">
-                                <input type="file" name="resume" id="fileInput" class="hidden" />
-                                <span id="drop-text">Drag and drop a file here or <span
-                                        class="cursor-pointer text-blue-500 underline"
-                                        onclick="document.getElementById('fileInput').click()">browse</span></span>
-                            </div>
 
-                            <x-button type="submit" variant="primary" class="w-1/3 self-center px-4 py-2">
-                                Submit
-                            </x-button>
+                    @if ($application)
+                        <div class="my-4 flex w-full flex-col gap-3 py-4">
+                            <div class="text-center text-lg font-medium">You have already applied for this job</div>
+                            <div class="flex flex-col items-center gap-3">
+                                <p class="text-zinc-500">Uploaded on: {{ $application->created_at->format('F j, Y') }}</p>
+                                <div class="flex w-full items-center justify-center gap-4">
+                                    <a href="{{ route('resumes.download', $application->id) }}"
+                                        class="text-primary-500 underline">
+                                        Download Resume
+                                    </a>
+                                    <!-- Delete Application Form -->
+                                    <form action="{{ route('applications.delete', $application->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 underline">Delete Application</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </x-forms.form>
+                    @else
+                        <x-forms.form action="{{ route('jobs.apply', $job->id) }}" method="POST" enctype="multipart/form-data"
+                            class="py-4">
+                            <div class="flex flex-col gap-4">
+                                <label class="text-center text-lg font-medium">Upload Your Resume</label>
+                                <div id="drop-area"
+                                    class="flex h-32 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-zinc-800 transition-all hover:border-primary-500">
+                                    <input type="file" name="resume" id="fileInput" class="hidden" />
+
+                                    <span id="drop-text">Drag and drop a file here or <span
+                                            class="cursor-pointer text-primary-500 underline"
+                                            onclick="document.getElementById('fileInput').click()">browse</span></span>
+                                </div>
+
+                                @error('resume')
+                                    <div class="text-sm text-red-500">{{ $message }}</div>
+                                @enderror
+
+                                <x-button type="submit" variant="primary" class="w-1/3 self-center px-4 py-2">
+                                    Submit
+                                </x-button>
+                            </div>
+                        </x-forms.form>
+                    @endif
                 </section>
             @endemployer
 
