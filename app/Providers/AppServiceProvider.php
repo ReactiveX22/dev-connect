@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        Blade::if('employer', function () {
-            return session('is_employer', false);
+        Blade::if('employer', function ($value = true) {
+            return session('is_employer', false) === $value;
         });
     }
 }

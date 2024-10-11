@@ -35,16 +35,31 @@
             </div>
         </x-panel>
 
+        @auth
 
-        <section>
-            <x-section-heading>Apply</x-section-heading>
-            <x-forms.form>
-                <div class="flex flex-col gap-4">
-                    Upload Resume
+            @employer(false)
+                <section>
+                    <x-section-heading>Apply For The Job</x-section-heading>
+                    <x-forms.form action="{{ route('jobs.apply', $job->id) }}" method="POST" enctype="multipart/form-data"
+                        class="py-4">
+                        <div class="flex flex-col gap-4">
+                            <label class="text-center text-lg font-medium">Upload Your Resume</label>
+                            <div id="drop-area"
+                                class="flex h-32 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-zinc-800 transition-all hover:border-primary-500">
+                                <input type="file" name="resume" id="fileInput" class="hidden" />
+                                <span id="drop-text">Drag and drop a file here or <span
+                                        class="cursor-pointer text-blue-500 underline"
+                                        onclick="document.getElementById('fileInput').click()">browse</span></span>
+                            </div>
 
-                    Submit
-                </div>
-            </x-forms.form>
-        </section>
+                            <x-button type="submit" variant="primary" class="w-1/3 self-center px-4 py-2">
+                                Submit
+                            </x-button>
+                        </div>
+                    </x-forms.form>
+                </section>
+            @endemployer
+
+        @endauth
     </div>
 </x-layout>

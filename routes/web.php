@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/jobs', [JobController::class, 'store']);
 
     Route::get('/profile', [ProfileController::class, 'show']);
+    Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'apply'])->name('jobs.apply');
 });
 
 Route::get('/jobs/{job}', [JobController::class, 'show']);

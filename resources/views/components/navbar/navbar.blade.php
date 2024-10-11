@@ -13,7 +13,7 @@
 
     <div
         class="absolute left-1/2 flex -translate-x-1/2 transform items-center justify-between gap-6 text-sm font-semibold">
-        <x-navbar.nav-link href='/' :active="request()->is('/')">Find Jobs</x-navbar.nav-link>
+        <x-navbar.nav-link href='/' :active="request()->is('/')">Jobs</x-navbar.nav-link>
         <x-navbar.nav-link href='/employers' :active="request()->is('employer')">Companies</x-navbar.nav-link>
     </div>
 
@@ -21,7 +21,7 @@
         <div class="flex gap-2">
 
             @employer
-                <x-button variant="primary" href="/jobs/create">
+                <x-button variant="primary" href="/jobs/create" class="px-4 py-1">
                     Post Job
                 </x-button>
             @endemployer
@@ -39,7 +39,7 @@
 
     @guest
         <div class="space-x-6 font-bold">
-            <x-button variant="primary" href="/login" class="px-4">
+            <x-button variant="primary" href="/login" class="px-4 py-[1.25]">
                 Login
             </x-button>
             {{-- <x-button variant="primary" href="/register">

@@ -13,7 +13,7 @@
     <title>devHunt 🎯</title>
 </head>
 
-<body class="bg-zinc-950 pb-10 font-inter text-zinc-50">
+<body class="h-screen bg-zinc-950 pb-10 font-inter text-zinc-50">
     <div class="mx-auto max-w-[986px] px-10">
         <x-navbar.navbar />
 
