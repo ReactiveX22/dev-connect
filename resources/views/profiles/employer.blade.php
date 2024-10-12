@@ -22,17 +22,25 @@
             </x-panel>
         </div>
 
-        <x-panel>
-            <div class="flex items-center justify-center gap-1">
-                <div class="text-xl font-bold">{{ $employer->jobs->count() }}</div>
-                <div class="text-sm text-zinc-400">jobs available</div>
-            </div>
-        </x-panel>
+        <div class="flex w-full justify-center gap-3">
+            <x-panel class="flex-grow">
+                <div class="flex items-baseline justify-center gap-2">
+                    <div class="text-2xl font-medium">{{ $employer->jobs->count() }}</div>
+                    <div class="text-sm text-zinc-400">Jobs</div>
+                </div>
+            </x-panel>
+            <x-panel class="flex-grow">
+                <div class="flex items-baseline justify-center gap-2">
+                    <div class="text-2xl font-medium">{{ $totalApplications }}</div>
+                    <div class="text-sm text-zinc-400">Applications</div>
+                </div>
+            </x-panel>
+        </div>
         <section>
             <x-section-heading>Recent Jobs</x-section-heading>
             <div class="mt-6 space-y-6">
-                @foreach ($employer->jobs as $job)
-                    <x-job-card-wide :$job />
+                @foreach ($jobs as $job)
+                    <x-dashboard-job-card :$job />
                 @endforeach
             </div>
         </section>

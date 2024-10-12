@@ -35,11 +35,11 @@
             </x-panel>
             @employer(true)
                 @if ($isOwnerOfJob)
-                    <x-panel>
+                    <x-panel class="h-fit p-3">
                         <div class="flex flex-col gap-2">
                             <!-- Edit Button -->
-                            <a href="{{ route('jobs.edit', $job->id) }}" class="flex items-center justify-center">
-                                <x-button variant="primary">Edit</x-button>
+                            <a href="{{ route('jobs.edit', $job->id) }}" class="flex w-full items-center justify-center">
+                                <x-button class="w-full" variant="primary">Edit</x-button>
                             </a>
 
                             <!-- Delete Job Form -->
@@ -47,7 +47,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <x-button type="submit" variant="ghost"
-                                    class="text-red-500 hover:text-red-600">Delete</x-button>
+                                    class="border border-transparent bg-red-700/10 text-red-500 hover:border hover:border-red-500 hover:text-red-500">Delete</x-button>
                             </form>
                         </div>
                     </x-panel>

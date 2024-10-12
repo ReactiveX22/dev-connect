@@ -14,11 +14,20 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if ($user->employer) {
-            return view('profiles.employer', ['employer' => $user->employer]);
+            $employer = $user->employer;
+            $jobs = Auth::user()->employer->jobs()->withCount('applications')->get();
+            $totalApplications = $employer->jobs()->withCount('applications')->get()->sum('applications_count');
+
+            return view('profiles.employer', [
+                'employer' => $employer,
+                'totalApplications' => $totalApplications,
+                'jobs' => $jobs
+            ]);
         }
 
         return view('profiles.jobseeker', ['user' => $user]);
     }
+
 
     public function jobSeekerEdit()
     {

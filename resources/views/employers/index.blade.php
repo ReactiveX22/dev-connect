@@ -4,9 +4,6 @@
         <section class="pt-6">
             <div class="flex flex-col items-center justify-center">
                 <h1 class="text-4xl font-bold">Find Companies</h1>
-                <x-forms.form action="/employers/search" class="tex-sm mt-10 w-full">
-                    <x-searchbar placeholder="Search for Companies..." />
-                </x-forms.form>
             </div>
         </section>
 
