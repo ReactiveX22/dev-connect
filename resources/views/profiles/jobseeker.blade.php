@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mx-auto flex max-w-3xl flex-col gap-4">
+    <div class="mx-auto flex max-w-3xl flex-col gap-6">
         <div class="flex w-full gap-3">
             <x-panel class="flex-grow">
                 <div class="flex justify-between gap-1">
@@ -17,5 +17,15 @@
                 </div>
             </x-panel>
         </div>
+
+        <section>
+            <x-section-heading>Applied Jobs</x-section-heading>
+            <div class="mt-3 space-y-6">
+                @foreach ($user->jobApplications as $application)
+                    <x-job-card-wide :job="$application->job" />
+                @endforeach
+            </div>
+
+        </section>
     </div>
 </x-layout>
