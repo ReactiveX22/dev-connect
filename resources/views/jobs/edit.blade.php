@@ -3,8 +3,7 @@
     <div class="my-16 flex flex-col gap-4">
         <x-page-heading>Edit Job: {{ $job->title }}</x-page-heading>
         <x-forms.form method="POST" action="{{ route('jobs.update', $job->id) }}">
-            @csrf
-            @method('PUT')
+            @method('PATCH')
             <div class="grid grid-cols-2 gap-6">
                 <x-forms.input label="Title" name="title" placeholder="CEO" value="{{ $job->title }}" />
                 <x-forms.input label="Salary" name="salary" placeholder="90,000 BDT" value="{{ $job->salary }}" />

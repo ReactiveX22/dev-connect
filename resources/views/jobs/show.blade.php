@@ -34,31 +34,32 @@
                 </div>
             </x-panel>
             @employer(true)
-                <x-panel>
-                    <div class="flex flex-col gap-2">
-                        <!-- Edit Button -->
-                        <a href="{{ route('jobs.edit', $job->id) }}">
-                            <x-button variant="primary">Edit</x-button>
-                        </a>
+                @if ($isOwnerOfJob)
+                    <x-panel>
+                        <div class="flex flex-col gap-2">
+                            <!-- Edit Button -->
+                            <a href="{{ route('jobs.edit', $job->id) }}" class="flex items-center justify-center">
+                                <x-button variant="primary">Edit</x-button>
+                            </a>
 
-                        <!-- Delete Job Form -->
-                        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <x-button type="submit" variant="ghost"
-                                class="text-red-500 hover:text-red-600">Delete</x-button>
-                        </form>
-                    </div>
-                </x-panel>
+                            <!-- Delete Job Form -->
+                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-button type="submit" variant="ghost"
+                                    class="text-red-500 hover:text-red-600">Delete</x-button>
+                            </form>
+                        </div>
+                    </x-panel>
+                @endif
             @endemployer
         </div>
 
         <section>
             <x-section-heading>Description</x-section-heading>
-            <div class="mt-4 flex w-full text-base text-zinc-400">
+            <x-panel class="mt-4">
                 <p>{{ $job->description }}</p>
-            </div>
-
+            </x-panel>
         </section>
 
         @auth

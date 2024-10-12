@@ -127,6 +127,9 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
+        if ($job->employer->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('jobs.edit', compact('job'));
     }
 
