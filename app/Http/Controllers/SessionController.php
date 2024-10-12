@@ -30,13 +30,17 @@ class SessionController extends Controller
         $isEmployer = Auth::user()->employer ? true : false;
         session(['is_employer' => $isEmployer]);
 
+        if ($isEmployer) {
+            return redirect()->route('dashboard');
+        }
+
         return redirect('/');
     }
 
     public function destroy()
     {
         Auth::logout();
-
+        request()->session()->flush();
         return redirect('/');
     }
 }

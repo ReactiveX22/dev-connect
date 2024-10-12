@@ -17,7 +17,7 @@
     <div class="mx-auto max-w-[986px] px-10">
         <x-navbar.navbar />
 
-        <main class="mx-auto mt-10 max-w-[986px]">
+        <main class="mx-auto mt-10 max-w-[986px] flex-grow">
             {{ $slot }}
         </main>
     </div>

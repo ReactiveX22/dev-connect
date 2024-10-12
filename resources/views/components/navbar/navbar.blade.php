@@ -13,8 +13,11 @@
 
     <div
         class="absolute left-1/2 flex -translate-x-1/2 transform items-center justify-between gap-6 text-sm font-semibold">
+        @employer(true)
+            <x-navbar.nav-link href='/dashboard' :active="request()->is('dashboard')">Dashboard</x-navbar.nav-link>
+        @endemployer
         <x-navbar.nav-link href='/' :active="request()->is('/')">Jobs</x-navbar.nav-link>
-        <x-navbar.nav-link href='/employers' :active="request()->is('employer')">Companies</x-navbar.nav-link>
+        <x-navbar.nav-link href='/employers' :active="request()->is('employers')">Companies</x-navbar.nav-link>
     </div>
 
     @auth

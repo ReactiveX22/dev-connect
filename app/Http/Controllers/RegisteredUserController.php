@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
 
@@ -29,6 +28,13 @@ class RegisteredUserController extends Controller
         return view('auth.register.employer');
     }
 
+    protected $sessionController;
+
+    public function __construct(SessionController $sessionController)
+    {
+        $this->sessionController = $sessionController;
+    }
+
     public function registerEmployer(Request $request)
     {
         $userAttributes = $request->validate([
@@ -51,9 +57,11 @@ class RegisteredUserController extends Controller
             'logo' => $logoPath,
         ]);
 
-        Auth::login($user);
+        $this->sessionController->store();
 
-        return redirect('/');
+        session(['is_employer' => true]);
+
+        return redirect('/dashboard');
     }
 
     public function registerJobSeeker(Request $request)
@@ -66,7 +74,9 @@ class RegisteredUserController extends Controller
 
         $user = User::create($userAttributes);
 
-        Auth::login($user);
+        $this->sessionController->store();
+
+        session(['is_employer' => false]);
 
         return redirect('/');
     }

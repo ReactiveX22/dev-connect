@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
+use App\Models\Employer;
 use App\Models\JobApplication;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class JobController extends Controller
             }
         }
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     /**
@@ -76,6 +77,20 @@ class JobController extends Controller
     {
         $job->load(['employer']);
 
+        $application = null;
+        $applications = [];
+        $isOwnerOfJob = false;
+
+        // no need for this, but maybe in future??
+        if (session()->get('is_employer')) {
+            $employer_user_id = $job->employer->user_id;
+
+            if ($employer_user_id === Auth::user()->id) {
+                $applications = JobApplication::where('job_id', $job->id)->get();
+                $isOwnerOfJob = true;
+            }
+        }
+
         $application = JobApplication::where('user_id', Auth::id())
             ->where('job_id', $job->id)
             ->first();
@@ -83,6 +98,8 @@ class JobController extends Controller
         return view('jobs.show', [
             'job' => $job,
             'application' => $application,
+            'applications' =>  $applications,
+            'isOwnerOfJob' =>  $isOwnerOfJob
         ]);
     }
 
@@ -90,20 +107,21 @@ class JobController extends Controller
     {
         $application = JobApplication::findOrFail($applicationId);
 
-        if ($application->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
+        if (!session()->get('is_employer')) {
+            if ($application->user_id !== Auth::id()) {
+                abort(403, 'Unauthorized action.');
+            }
         }
 
         $filePath = storage_path('app/private/' . $application->resume);
 
+        // Check if the file exists
         if (!file_exists($filePath)) {
             abort(404, 'File not found.');
         }
 
         return response()->download($filePath);
     }
-
-
 
     /**
      * Show the form for editing the specified resource.

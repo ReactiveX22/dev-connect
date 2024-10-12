@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
@@ -24,9 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'apply'])->name('jobs.apply');
     Route::get('/resumes/{application}', [JobController::class, 'downloadResume'])->name('resumes.download');
     Route::delete('/applications/{application}', [JobApplicationController::class, 'delete'])->name('applications.delete');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-Route::get('/jobs/{job}', [JobController::class, 'show']);
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
 
 Route::get('/search', SearchController::class);
 Route::get('/tags/{tag:name}', TagController::class);
