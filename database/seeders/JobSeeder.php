@@ -20,7 +20,7 @@ class JobSeeder extends Seeder
         $tags = Tag::all();
 
         $jobs->each(function ($job) use ($tags) {
-            $randomTags = $tags->random(rand(2, 5)); // Randomly pick between 2 and 5 tags
+            $randomTags = $tags->random(rand(2, 5));
             $job->tags()->attach($randomTags->pluck('id')->toArray());
         });
     }

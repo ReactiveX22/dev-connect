@@ -53,7 +53,7 @@ class JobController extends Controller
             'salary' => ['required'],
             'location' => ['required'],
             'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
-            'url' => ['required', 'active_url'],
+            'description' => ['required'],
             'tags' => ['nullable'],
         ]);
 
@@ -62,12 +62,12 @@ class JobController extends Controller
         $job = Auth::user()->employer->jobs()->create(Arr::except($attributes, 'tags'));
 
         if ($attributes['tags'] ?? false) {
-            foreach (explode(', ', $attributes['tags']) as $tag) {
-                $job->tag($tag);
+            foreach (explode(',', $attributes['tags']) as $tag) {
+                $job->tag(trim($tag));
             }
         }
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'Job posted successfully!');
     }
 
     /**
@@ -115,7 +115,6 @@ class JobController extends Controller
 
         $filePath = storage_path('app/private/' . $application->resume);
 
-        // Check if the file exists
         if (!file_exists($filePath)) {
             abort(404, 'File not found.');
         }
@@ -128,15 +127,37 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+        return view('jobs.edit', compact('job'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobRequest $request, Job $job)
+    public function update(Request $request, Job $job)
     {
-        //
+        $attributes = $request->validate([
+            'title' => ['required'],
+            'salary' => ['required'],
+            'location' => ['required'],
+            'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
+            'description' => ['required'],
+            'tags' => ['nullable'],
+        ]);
+
+        $attributes['featured'] = $request->has('featured');
+        $job->update(Arr::except($attributes, 'tags'));
+
+        if ($attributes['tags'] ?? false) {
+            $job->tags()->detach();
+
+            foreach (explode(',', $attributes['tags']) as $tag) {
+                $tag = trim($tag);
+                $existingTag = Tag::firstOrCreate(['name' => $tag]);
+                $job->tags()->attach($existingTag->id);
+            }
+        }
+
+        return redirect()->route('jobs.show', $job->id)->with('success', 'Job updated successfully.');
     }
 
     /**
@@ -144,6 +165,8 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+        $job->delete();
+
+        return redirect('/dashboard')->with('success', 'Job deleted successfully.');
     }
 }

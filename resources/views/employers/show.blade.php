@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mx-auto flex max-w-lg flex-col gap-4">
+    <div class="mx-auto flex flex-col gap-4">
         <x-panel>
             <div class="flex items-center justify-between gap-1">
                 <div class="text-lg font-bold">{{ $employer->name }}</div>

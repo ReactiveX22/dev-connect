@@ -20,6 +20,9 @@ Route::get('/employers/{employer}', [EmployerController::class, 'show']);
 Route::middleware('auth')->group(function () {
     Route::get('/jobs/create', [JobController::class, 'create']);
     Route::post('/jobs', [JobController::class, 'store']);
+    Route::get('jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
+    Route::put('jobs/{job}', [JobController::class, 'update'])->name('jobs.update');
+    Route::delete('jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
 
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'apply'])->name('jobs.apply');

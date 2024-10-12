@@ -4,38 +4,54 @@
             $defaultClasses = 'flex flex-col cursor-pointer border border-zinc-800 text-center';
         @endphp
 
-        <x-panel>
-            <a href="/employers/{{ $job->employer->id }}"
-                class="text-nowrap mb-4 self-start border-b border-transparent text-sm transition-all hover:border-primary-500">{{ $job->employer->name }}
-            </a>
-
-            <div class="my-4 flex justify-center">
-                <div class="text-xl font-bold">
-                    {{ $job->title }}
-                </div>
-            </div>
-
-            <div class="my-4 flex flex-col items-center gap-1">
-                <div class="text-md">{{ $job->schedule }}</div>
-                <div>
-                    <span class="text-xs">from</span> {{ $job->salary }}
-                </div>
-            </div>
-
-            <div class="mt-8 flex items-center justify-between">
-                <div class="flex max-w-xs items-center gap-2 overflow-hidden">
-                    <div class="flex flex-wrap gap-1 overflow-hidden">
-                        @foreach ($job->tags as $tag)
-                            <x-tag :$tag size="small" />
-                        @endforeach
+        <div class="flex w-full gap-3">
+            <x-panel class="flex-grow">
+                <a href="/employers/{{ $job->employer->id }}"
+                    class="text-nowrap mb-4 self-start border-b border-transparent text-sm transition-all hover:border-primary-500">{{ $job->employer->name }}
+                </a>
+                <div class="my-4 flex justify-center">
+                    <div class="text-xl font-bold">
+                        {{ $job->title }}
                     </div>
-                    <div class="h-full w-6 bg-gradient-to-l from-transparent to-zinc-800"></div>
-                    <!-- Gradient shadow -->
                 </div>
+                <div class="my-4 flex flex-col items-center gap-1">
+                    <div class="text-md">{{ $job->schedule }}</div>
+                    <div>
+                        <span class="text-xs">from</span> {{ $job->salary }}
+                    </div>
+                </div>
+                <div class="mt-8 flex items-center justify-between">
+                    <div class="flex max-w-xs items-center gap-2 overflow-hidden">
+                        <div class="flex flex-wrap gap-1 overflow-hidden">
+                            @foreach ($job->tags as $tag)
+                                <x-tag :$tag size="small" />
+                            @endforeach
+                        </div>
+                        <div class="h-full w-6 bg-gradient-to-l from-transparent to-zinc-800"></div>
+                        <!-- Gradient shadow -->
+                    </div>
+                    <x-employer-logo :employer="$job->employer" :size=42 />
+                </div>
+            </x-panel>
+            @employer(true)
+                <x-panel>
+                    <div class="flex flex-col gap-2">
+                        <!-- Edit Button -->
+                        <a href="{{ route('jobs.edit', $job->id) }}">
+                            <x-button variant="primary">Edit</x-button>
+                        </a>
 
-                <x-employer-logo :employer="$job->employer" :size=42 />
-            </div>
-        </x-panel>
+                        <!-- Delete Job Form -->
+                        <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <x-button type="submit" variant="ghost"
+                                class="text-red-500 hover:text-red-600">Delete</x-button>
+                        </form>
+                    </div>
+                </x-panel>
+            @endemployer
+        </div>
 
         <section>
             <x-section-heading>Description</x-section-heading>
@@ -92,6 +108,7 @@
                                 </x-button>
                             </div>
                         </x-forms.form>
+                        @vite(['resources/js/drag-and-drop.js'])
                     @endif
                 </section>
             @endemployer

@@ -4,4 +4,4 @@ import.meta.glob([
     '../images/**'
 ]);
 
-import './drag-and-drop';
+import './dropdown';

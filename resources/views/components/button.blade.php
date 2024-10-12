@@ -3,7 +3,7 @@
 @php
     $classes = [
         'primary' => 'bg-primary-600 hover:bg-primary-800',
-        'ghost' => 'bg-transparent hover:text-primary-500',
+        'ghost' => 'bg-transparent hover:text-primary-400',
         'secondary' => 'bg-transparent hover:bg-primary-800',
     ];
 

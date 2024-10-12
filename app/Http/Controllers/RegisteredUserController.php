@@ -10,19 +10,16 @@ use Illuminate\Validation\Rules\Password;
 class RegisteredUserController extends Controller
 {
 
-    // Show selection page
     public function showSelection()
     {
         return view('auth.register.selection');
     }
 
-    // Show job seeker registration form
     public function showJobSeekerForm()
     {
         return view('auth.register.job-seeker');
     }
 
-    // Show employer registration form
     public function showEmployerForm()
     {
         return view('auth.register.employer');
