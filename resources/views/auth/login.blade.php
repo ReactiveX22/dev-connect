@@ -26,7 +26,7 @@
                     </p>
                     <p class="text-sm text-zinc-400">
                         Forgot Password?
-                        <a href="/forgot-password" class="font-medium text-blue-500 hover:text-blue-700">
+                        <a href="{{ route('password.request') }}" class="font-medium text-blue-500 hover:text-blue-700">
                             Reset password
                         </a>
                     </p>
