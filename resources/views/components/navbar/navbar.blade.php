@@ -2,7 +2,7 @@
     <div>
         <a href="/" class="flex items-center gap-1">
             <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="">
-            <h3 class="text-xl">devHunt🎯</h3>
+            <h3 class="text-xl">DevConnect🎯</h3>
         </a>
     </div>
 

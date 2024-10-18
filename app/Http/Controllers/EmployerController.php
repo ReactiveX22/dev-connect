@@ -32,7 +32,6 @@ class EmployerController extends Controller
 
     public function edit(Employer $employer)
     {
-        // Ensure the authenticated user owns the employer profile
         if ($employer->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -59,13 +58,11 @@ class EmployerController extends Controller
 
         $user = User::findOrFail($employer->user_id);
 
-        // Update only the fields that are provided
         $updateData = [
             'name' => $userAttributes['name'],
             'email' => $userAttributes['email'],
         ];
 
-        // Only add the password if it's provided
         if (!empty($request->password)) {
             $updateData['password'] = bcrypt($request->password);
         }

@@ -3,9 +3,9 @@
         <x-page-heading>Post a New Job</x-page-heading>
         <x-forms.form method="POST" action="/jobs">
             <div class="grid grid-cols-2 gap-6">
-                <x-forms.input label="Title" name="title" placeholder="CEO" />
+                <x-forms.input label="Title" name="title" placeholder="Backend Developer" />
                 <x-forms.input label="Salary" name="salary" placeholder="90,000 BDT" />
-                <x-forms.input label="Location" name="location" placeholder="Chittagon, Bangladesh" />
+                <x-forms.input label="Location" name="location" placeholder="Chittagong, Bangladesh" />
                 <x-forms.select label="Schedule" name="schedule">
                     <option>Part Time</option>
                     <option>Full Time</option>

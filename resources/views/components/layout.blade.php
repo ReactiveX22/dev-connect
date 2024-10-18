@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <title>devHunt 🎯</title>
+    <title>DevConnect🎯</title>
 </head>
 
 <body class="max-h-screen bg-zinc-950 pb-10 font-inter text-zinc-50">

@@ -23,6 +23,24 @@ class JobFactory extends Factory
         "Be part of a forward-thinking company that values innovation and creativity.",
     ];
 
+    protected array $titles = [
+        'Frontend Developer',
+        'Backend Developer',
+        'Full Stack Developer',
+        'DevOps Engineer',
+        'Software Engineer',
+        'Web Developer',
+        'Mobile Developer',
+        'Data Scientist',
+        'Machine Learning Engineer',
+        'Quality Assurance Engineer',
+        'Systems Analyst',
+        'Game Developer',
+        'UX/UI Designer',
+        'Technical Support Engineer',
+        'Cloud Engineer',
+    ];
+
     /**
      * Define the model's default state.
      *
@@ -32,7 +50,7 @@ class JobFactory extends Factory
     {
         return [
             'employer_id' => Employer::factory(),
-            'title' => $this->faker->jobTitle(),
+            'title' => $this->faker->randomElement($this->titles), // Randomly selects a title from the dev-related titles
             'salary' => $this->faker->randomElement(['50,000 BDT', '60,000 BDT', '70,000 BDT']),
             'location' => $this->faker->city(),
             'schedule' => $this->faker->randomElement(['Full Time', 'Part Time', 'Contract']),

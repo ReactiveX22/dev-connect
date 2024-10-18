@@ -35,22 +35,27 @@
             </x-panel>
             @employer(true)
                 @if ($isOwnerOfJob)
-                    <x-panel class="h-fit p-3">
-                        <div class="flex flex-col gap-2">
-                            <!-- Edit Button -->
-                            <a href="{{ route('jobs.edit', $job->id) }}" class="flex w-full items-center justify-center">
-                                <x-button class="w-full" variant="primary">Edit</x-button>
-                            </a>
+                    <div class="flex flex-col gap-3">
+                        <x-panel class="h-fit p-3">
+                            <div class="flex flex-col gap-2">
+                                <!-- Edit Button -->
+                                <a href="{{ route('jobs.edit', $job->id) }}"
+                                    class="flex w-full items-center justify-center">
+                                    <x-button class="w-full" variant="primary">Edit</x-button>
+                                </a>
+                                <!-- Delete Job Form -->
+                                <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-button type="submit" variant="ghost"
+                                        class="border border-transparent bg-red-700/10 text-red-500 hover:border hover:border-red-500 hover:text-red-500">Delete</x-button>
+                                </form>
+                            </div>
+                        </x-panel>
+                        <x-panel class="h-full border-zinc-900/30 bg-zinc-900/25 p-3">
 
-                            <!-- Delete Job Form -->
-                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-button type="submit" variant="ghost"
-                                    class="border border-transparent bg-red-700/10 text-red-500 hover:border hover:border-red-500 hover:text-red-500">Delete</x-button>
-                            </form>
-                        </div>
-                    </x-panel>
+                        </x-panel>
+                    </div>
                 @endif
             @endemployer
         </div>

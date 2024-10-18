@@ -7,10 +7,8 @@
         'secondary' => 'bg-transparent hover:bg-primary-800',
     ];
 
-    // Get the variant class or default to 'primary'
     $variantClass = $classes[$variant] ?? $classes['primary'];
 
-    // Merge the variant class with any additional classes passed via the 'class' attribute
     $combinedClass = trim("$variantClass $class");
 @endphp
 

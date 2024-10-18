@@ -24,11 +24,11 @@ class JobController extends Controller
         $jobs = Job::latest()->with('employer', 'tags')->get()->groupBy('featured');
 
         // Limit featured jobs to 3
-        $featuredJobs = $jobs[1]->take(3) ?? collect(); // Use null coalescence to handle case when there are no featured jobs
+        $featuredJobs = $jobs[1]->take(3) ?? collect();
 
         return view('jobs.index', [
             'featuredJobs' => $featuredJobs,
-            'jobs' => $jobs[0] ?? collect(), // Handle case where there are no non-featured jobs
+            'jobs' => $jobs[0] ?? collect(),
             'tags' => Tag::all(),
         ]);
     }
