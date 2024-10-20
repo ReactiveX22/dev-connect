@@ -2,6 +2,11 @@
 
 DevConnect is a job portal designed to connect developers with employers, featuring functionalities for job postings and application tracking.
 
+## Preview
+
+### Landing Page
+![Landing Page](https://github.com/user-attachments/assets/f3a6191f-6014-4a03-891f-fc67cdac6b88?raw=true)
+
 ## Getting Started
 
 ### Prerequisites
@@ -74,10 +79,3 @@ If you want to use the password reset feature, update the `.env` file with your 
 MAIL_USERNAME=your_mailtrap_username
 MAIL_PASSWORD=your_mailtrap_password
 ```
-
-## Preview
-
-### Landing Page
-![Landing Page](https://github.com/user-attachments/assets/f3a6191f-6014-4a03-891f-fc67cdac6b88?raw=true)
-
-
