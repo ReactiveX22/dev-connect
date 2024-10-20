@@ -114,7 +114,6 @@
                                 </x-button>
                             </div>
                         </x-forms.form>
-                        @vite(['resources/js/drag-and-drop.js'])
                     @endif
                 </section>
             @endemployer

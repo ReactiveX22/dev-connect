@@ -5,3 +5,4 @@ import.meta.glob([
 ]);
 
 import './dropdown';
+import './drag-and-drop';
