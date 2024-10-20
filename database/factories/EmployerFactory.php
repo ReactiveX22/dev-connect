@@ -22,7 +22,7 @@ class EmployerFactory extends Factory
             'name' => fake()->company(),
             'logo' => function () {
                 // Get an array of all files in the public/logos directory starting with 'uifaces'
-                $files = glob(storage_path('app/public/logos/uifaces*'));
+                $files = glob(storage_path('app/public/logos/*'));
 
                 // If there are matching files, return only the file name, otherwise return a default image
                 return count($files) > 0 ? 'logos/' . basename($files[array_rand($files)]) : 'default-logo.jpg';
