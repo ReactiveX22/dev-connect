@@ -2,10 +2,10 @@
 
 DevConnect is a job portal designed to connect developers with employers, featuring functionalities for job postings and application tracking.
 
-## Preview
+## Presentation & Demo
 
-### Landing Page
-![Landing Page](https://github.com/user-attachments/assets/f3a6191f-6014-4a03-891f-fc67cdac6b88?raw=true)
+- [Download Project Presentation](./Project_Presentation/DevConnect_Project_Presentation.pptx)
+- [Watch Demo Video](./Project_Presentation/DevConnect_demo.mp4)
 
 ## Getting Started
 
